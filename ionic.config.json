@@ -1,0 +1,7 @@
+{
+  "name": "PollaFutbolera",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

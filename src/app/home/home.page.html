@@ -1,20 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="app-header-toolbar">
+    <div class="header-brand">
+      <h1 class="brand-title">Mis Apuestas</h1>
+      <p class="brand-subtitle">Gestiona tus apuestas deportivas</p>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="home-content">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <!-- ── Tarjetas de estadísticas ───────────────────────────────────── -->
+  <section class="stats-section">
+    <ion-grid [fixed]="true">
+      <ion-row>
+        @for (stat of stats; track stat.key) {
+          <ion-col size="4">
+            <ion-card class="stat-card">
+              <ion-card-content>
+                <p class="stat-value">{{ stat.value }}</p>
+                <p class="stat-label">{{ stat.label }}</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
+  </section>
+
+  <!-- ── Botones de acción ──────────────────────────────────────────── -->
+  <section class="actions-section">
+
+    <ion-button expand="block" class="btn-register" (click)="irARegistrar()">
+      <div class="btn-inner">
+        <ion-icon name="add-circle-outline" class="btn-icon"></ion-icon>
+        <div class="btn-text">
+          <span class="btn-title">Registrar mis apuestas</span>
+          <span class="btn-desc">Añade nuevas apuestas al sistema</span>
+        </div>
+      </div>
+    </ion-button>
+
+    <ion-button expand="block" class="btn-search">
+      <div class="btn-inner">
+        <ion-icon name="search-outline" class="btn-icon"></ion-icon>
+        <div class="btn-text">
+          <span class="btn-title">Buscar apuestas realizadas</span>
+          <span class="btn-desc">Consulta tu historial de apuestas</span>
+        </div>
+      </div>
+    </ion-button>
+
+  </section>
+
 </ion-content>

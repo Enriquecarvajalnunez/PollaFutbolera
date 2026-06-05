@@ -25,6 +25,39 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+// ── Header compartido — estilo de marca ──────────────────────────────────
+// Estos estilos van en global.scss porque se usan en múltiples páginas.
+// Los estilos component-scoped (page.scss) no pueden cruzar componentes.
+// Al ir aquí, la clase .app-header-toolbar aplica a cualquier página que
+// use el mismo markup sin duplicar código.
+.app-header-toolbar {
+  --background: linear-gradient(135deg, var(--pf-color-primary) 0%, var(--pf-color-primary-dark) 100%);
+  --min-height: 88px;
+  --padding-bottom: 16px;
+  --padding-start: 0;
+  --padding-end: 0;
+  --border-width: 0;
+
+  .header-brand {
+    padding: 8px 20px 0;
+  }
+
+  .brand-title {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin: 0 0 4px;
+  }
+
+  .brand-subtitle {
+    color: var(--pf-color-primary-light);
+    font-size: 13px;
+    font-weight: 400;
+    margin: 0;
+  }
+}
+
 /**
  * Ionic Dark Mode
  * -----------------------------------------------------

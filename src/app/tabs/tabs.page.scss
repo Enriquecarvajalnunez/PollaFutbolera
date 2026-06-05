@@ -1,0 +1,13 @@
+// ── Tab Bar ───────────────────────────────────────────────────────────────
+// IonTabBar expone sus colores via variables CSS del sistema Ionic.
+// Usamos las variables --pf- centralizadas en theme/variables.scss.
+.app-tab-bar {
+  --background: #ffffff;
+  --border: 1px solid var(--pf-border-light);
+
+  // Color del tab activo
+  --color-selected: var(--pf-tab-active);
+
+  // Color del tab inactivo
+  --color: var(--pf-tab-inactive);
+}

@@ -1,0 +1,138 @@
+.registrar-content {
+  --background: #f4f5f8;
+}
+
+// ── Tarjetas ────────────────────────────────────────────────────────────
+.section-card,
+.grupo-card {
+  margin: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ion-color-dark);
+}
+
+.grupo-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ion-color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+// ── Items del formulario ─────────────────────────────────────────────────
+.form-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 4px;
+}
+
+// ── Fila de partido ──────────────────────────────────────────────────────
+.partido-row {
+  border-bottom: 1px solid var(--ion-color-light-shade);
+  padding: 4px 0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.partido-grid {
+  --ion-grid-padding: 0;
+}
+
+// ── Nombres de equipos ───────────────────────────────────────────────────
+.equipo-col {
+  display: flex;
+  align-items: center;
+}
+
+.equipo-local {
+  justify-content: flex-end;
+}
+
+.equipo-visitante {
+  justify-content: flex-start;
+}
+
+.equipo-nombre {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+  line-height: 1.2;
+  text-align: center;
+}
+
+// ── Inputs de marcador ───────────────────────────────────────────────────
+.marcadores-col {
+  display: flex;
+  justify-content: center;
+}
+
+.marcadores-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.score-input {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 4px;
+  --padding-bottom: 4px;
+  --background: var(--ion-color-light);
+  --border-radius: 6px;
+  --color: var(--ion-color-dark);
+
+  width: 44px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+
+  // Ocultar flechas del input numérico
+  &::part(native) {
+    text-align: center;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+.score-separator {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ion-color-medium);
+  padding: 0 2px;
+}
+
+// ── Botón de envío ───────────────────────────────────────────────────────
+.submit-section {
+  padding: 16px;
+  padding-bottom: calc(16px + var(--ion-safe-area-bottom, 0px));
+}
+
+.btn-submit {
+  --background: linear-gradient(135deg, #1a73e8, #0d47a1);
+  --background-activated: linear-gradient(135deg, #1557b0, #0a2f6b);
+  --border-radius: 12px;
+  --box-shadow: 0 4px 12px rgba(26, 115, 232, 0.4);
+  height: 52px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.submit-hint {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.82rem;
+}

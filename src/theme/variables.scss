@@ -1,2 +1,32 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+// PollaFutbolera — Custom Color Palette
+// All values use the --pf- prefix (PollaFutbolera) to avoid
+// collisions with Ionic's own --ion- variables.
+:root {
+  // Primary — Azul (header, navegación activa)
+  --pf-color-primary:       #2563EB; // blue-600  — gradiente inicio
+  --pf-color-primary-dark:  #1E40AF; // blue-800  — gradiente fin
+  --pf-color-primary-light: #DBEAFE; // blue-100  — texto secundario sobre header
+
+  // Acción: Registrar — Verde
+  --pf-color-register:      #22C55E; // green-500 — gradiente inicio
+  --pf-color-register-dark: #16A34A; // green-600 — gradiente fin
+
+  // Acción: Buscar — Morado
+  --pf-color-search:        #A855F7; // purple-500 — gradiente inicio
+  --pf-color-search-dark:   #9333EA; // purple-600 — gradiente fin
+
+  // Navegación (tabs)
+  --pf-tab-active:   #2563EB; // blue-600
+  --pf-tab-inactive: #9CA3AF; // gray-400
+
+  // Fondos
+  --pf-background-app:  #F3F4F6; // gray-100
+  --pf-background-card: #ffffff;
+
+  // Bordes
+  --pf-border-light:  #E5E7EB; // gray-200
+  --pf-border-medium: #D1D5DB; // gray-300
+}

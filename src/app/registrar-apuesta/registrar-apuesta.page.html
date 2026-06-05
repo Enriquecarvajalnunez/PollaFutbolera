@@ -1,0 +1,140 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="app-header-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/inicio" text=""></ion-back-button>
+    </ion-buttons>
+    <div class="header-brand">
+      <h1 class="brand-title">Registrar Apuesta</h1>
+      <p class="brand-subtitle">Completa los 24 marcadores</p>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="registrar-content">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- ── Datos del apostador ──────────────────────────────────────── -->
+    <ion-card class="section-card">
+      <ion-card-header>
+        <ion-card-title class="section-title">Tus datos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-item lines="full" class="form-item">
+          <ion-input
+            formControlName="nombre"
+            label="Nombre completo"
+            labelPlacement="floating"
+            placeholder="Ej: Juan Pérez García"
+            autocomplete="name"
+            [errorText]="
+              form.get('nombre')?.hasError('required') ? 'El nombre es obligatorio' :
+              form.get('nombre')?.hasError('minlength') ? 'Mínimo 3 caracteres' : ''
+            ">
+          </ion-input>
+        </ion-item>
+
+        <ion-item lines="none" class="form-item">
+          <ion-input
+            formControlName="identificacion"
+            label="Número de identificación"
+            labelPlacement="floating"
+            placeholder="Solo dígitos, mínimo 6"
+            inputmode="numeric"
+            [errorText]="
+              form.get('identificacion')?.hasError('required') ? 'La identificación es obligatoria' :
+              form.get('identificacion')?.hasError('minlength') ? 'Mínimo 6 dígitos' :
+              form.get('identificacion')?.hasError('pattern')  ? 'Solo se permiten dígitos' : ''
+            ">
+          </ion-input>
+        </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+
+    <!-- ── Partidos por grupo ───────────────────────────────────────── -->
+    <div formArrayName="bets">
+      @for (grupo of grupos; track grupo.nombre) {
+        <ion-card class="grupo-card">
+          <ion-card-header>
+            <ion-card-title class="grupo-title">{{ grupo.nombre }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+
+            @for (partido of grupo.partidos; track partido.index) {
+              <div class="partido-row" [formGroupName]="partido.index">
+                <ion-grid class="partido-grid">
+                  <ion-row class="ion-align-items-center">
+
+                    <!-- Equipo A -->
+                    <ion-col size="4" class="equipo-col equipo-local">
+                      <ion-text class="equipo-nombre">{{ partido.equipoA }}</ion-text>
+                    </ion-col>
+
+                    <!-- Marcadores -->
+                    <ion-col size="4" class="marcadores-col">
+                      <div class="marcadores-row">
+                        <ion-input
+                          formControlName="marcadorA"
+                          type="number"
+                          inputmode="numeric"
+                          min="0"
+                          max="99"
+                          class="score-input"
+                          placeholder="0"
+                          aria-label="Goles {{ partido.equipoA }}">
+                        </ion-input>
+                        <span class="score-separator">-</span>
+                        <ion-input
+                          formControlName="marcadorB"
+                          type="number"
+                          inputmode="numeric"
+                          min="0"
+                          max="99"
+                          class="score-input"
+                          placeholder="0"
+                          aria-label="Goles {{ partido.equipoB }}">
+                        </ion-input>
+                      </div>
+                    </ion-col>
+
+                    <!-- Equipo B -->
+                    <ion-col size="4" class="equipo-col equipo-visitante">
+                      <ion-text class="equipo-nombre">{{ partido.equipoB }}</ion-text>
+                    </ion-col>
+
+                  </ion-row>
+                </ion-grid>
+              </div>
+            }
+
+          </ion-card-content>
+        </ion-card>
+      }
+    </div>
+
+    <!-- ── Botón de envío ───────────────────────────────────────────── -->
+    <div class="submit-section">
+      <ion-button
+        type="submit"
+        expand="block"
+        class="btn-submit"
+        [disabled]="form.invalid || isSubmitting">
+        @if (isSubmitting) {
+          <ion-spinner name="crescent" slot="start"></ion-spinner>
+          Enviando...
+        } @else {
+          <ion-icon name="send-outline" slot="start"></ion-icon>
+          Registrar Apuesta
+        }
+      </ion-button>
+
+      @if (form.invalid && form.dirty) {
+        <ion-note class="submit-hint" color="medium">
+          Completa todos los marcadores y tus datos para continuar.
+        </ion-note>
+      }
+    </div>
+
+  </form>
+</ion-content>

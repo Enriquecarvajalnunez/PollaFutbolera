@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // Reemplaza con la URL de tu Google Apps Script (Deploy → Web App URL)
+  gasApiUrl: 'https://script.google.com/macros/s/AKfycbxgxe-Mtfx9w_0m-qU60O05B4rkw5S_gS_7lJd18DtG4MM9DV1zyIK5g5qHEfSdvqD2/exec',
 };
 
 /*

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "ionic": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "skillPath": "ionic/SKILL.md",
+      "computedHash": "372e5028821c1ad056931a1b848a967826606d251b1e45b32a340e010953a9c3"
+    },
+    "ionic-angular": {
+      "source": "capawesome-team/skills",
+      "sourceType": "github",
+      "skillPath": "skills/ionic-angular/SKILL.md",
+      "computedHash": "b54258cdbf0810b2d6e60fbdf546575cbf729eff87c7378af74d445528e8647d"
+    },
+    "ionic-design": {
+      "source": "cap-go/capacitor-skills",
+      "sourceType": "github",
+      "skillPath": "skills/ionic-design/SKILL.md",
+      "computedHash": "53fee1af0a454c03fd35afd93d1127f82f417e86fc61c9ad2e49fd46af16208f"
+    }
+  }
+}

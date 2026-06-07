@@ -121,7 +121,7 @@ export class RegistrarApuestaPage {
     await loading.present();
 
     try {
-      // 1️⃣ Verificar que la ventana de apuestas esté abierta
+      //Verificar que la ventana de apuestas esté abierta
       const reloj = await firstValueFrom(this.relojService.verificar());
 
       if (!reloj.success || !reloj.abierto) {
@@ -135,7 +135,7 @@ export class RegistrarApuestaPage {
         return;
       }
 
-      // 2️⃣ Enviar la apuesta
+      //Enviar la apuesta
       loading.message = 'Registrando apuesta...';
       const { nombre, identificacion, bets } = this.form.getRawValue();
       const response = await firstValueFrom(

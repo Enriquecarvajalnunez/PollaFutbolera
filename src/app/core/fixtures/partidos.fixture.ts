@@ -1,5 +1,5 @@
 /**
- * Partidos del torneo — hardcodeados en el frontend.
+ * Fixture de partidos del torneo — hardcodeado en el frontend.
  * Modifica SOLO este archivo para cambiar el fixture.
  *
  * Cada entrada representa un partido con su grupo y equipos.
@@ -8,11 +8,7 @@
  *
  * Estructura esperada: 24 partidos (los ingresa el equipo).
  */
-export interface Partido {
-  grupo: string;
-  equipoA: string;
-  equipoB: string;
-}
+import { Partido } from '../models/partido.model';
 
 export const PARTIDOS: Partido[] = [    
    { grupo: 'Grupo A', equipoA: 'México',  equipoB: 'Sudáfrica' },

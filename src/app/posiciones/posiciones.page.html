@@ -2,11 +2,88 @@
   <ion-toolbar class="app-header-toolbar">
     <div class="header-brand">
       <h1 class="brand-title">Posiciones</h1>
-      <p class="brand-subtitle">Tabla de posiciones por grupo</p>
+      <p class="brand-subtitle">Tabla general de apostadores</p>
     </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!-- Pantalla por implementar -->
+<ion-content class="posiciones-content">
+
+  <!-- ── Estado: cargando ──────────────────────────────────────────────── -->
+  @if (isLoading) {
+    <div class="state-container">
+      <ion-spinner name="crescent" class="loading-spinner"></ion-spinner>
+      <p class="state-text">Cargando posiciones...</p>
+    </div>
+  }
+
+  <!-- ── Estado: error ─────────────────────────────────────────────────── -->
+  @if (!isLoading && errorMessage) {
+    <div class="state-container">
+      <ion-icon name="trophy-outline" class="error-icon"></ion-icon>
+      <p class="state-text error-text">{{ errorMessage }}</p>
+      <ion-button fill="outline" size="small" (click)="cargarRanking()">
+        <ion-icon name="refresh-outline" slot="start"></ion-icon>
+        Reintentar
+      </ion-button>
+    </div>
+  }
+
+  <!-- ── Estado: sin datos ─────────────────────────────────────────────── -->
+  @if (!isLoading && !errorMessage && ranking.length === 0) {
+    <div class="state-container">
+      <ion-icon name="trophy-outline" class="empty-icon"></ion-icon>
+      <p class="state-text">Aún no hay posiciones registradas.</p>
+    </div>
+  }
+
+  <!-- ── Tabla de posiciones ───────────────────────────────────────────── -->
+  @if (!isLoading && !errorMessage && ranking.length > 0) {
+    <section class="ranking-section">
+
+      <!-- Cabecera de columnas -->
+      <div class="ranking-header">
+        <span class="col-pos">#</span>
+        <span class="col-nombre">Nombre</span>
+        <span class="col-cedula">Cédula</span>
+        <span class="col-puntos">Pts</span>
+      </div>
+
+      <ion-list class="ranking-list" lines="none">
+        @for (entry of ranking; track entry.posicion) {
+          <ion-item
+            class="ranking-item"
+            [class.medalla-oro]="entry.posicion === 1"
+            [class.medalla-plata]="entry.posicion === 2"
+            [class.medalla-bronce]="entry.posicion === 3">
+
+            <!-- Posición con medalla top-3 -->
+            <div
+              slot="start"
+              class="posicion-badge"
+              [class.medalla-oro]="entry.posicion === 1"
+              [class.medalla-plata]="entry.posicion === 2"
+              [class.medalla-bronce]="entry.posicion === 3">
+              <span class="posicion-num">{{ entry.posicion }}</span>
+            </div>
+
+            <!-- Nombre y cédula -->
+            <ion-label class="entry-label">
+              <p class="entry-nombre">{{ entry.nombre }}</p>
+              <p class="entry-cedula">{{ entry.cedula }}</p>
+            </ion-label>
+
+            <!-- Puntos -->
+            <div slot="end" class="puntos-container">
+              <span class="puntos-valor">{{ entry.puntos }}</span>
+              <span class="puntos-label">pts</span>
+            </div>
+
+          </ion-item>
+        }
+      </ion-list>
+
+    </section>
+  }
+
 </ion-content>

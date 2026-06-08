@@ -30,12 +30,8 @@ import {
 
 import { ApuestasService } from '../core/services/apuestas.service';
 import { RelojService } from '../core/services/reloj.service';
-import { PARTIDOS, Partido } from '../core/fixtures/partidos.fixture';
-
-interface GrupoDisplay {
-  nombre: string;
-  partidos: Array<Partido & { index: number }>;
-}
+import { PARTIDOS } from '../core/fixtures/partidos.fixture';
+import { GrupoDisplay, buildGrupos } from './registrar-apuesta.model';
 
 @Component({
   selector: 'app-registrar-apuesta',
@@ -65,15 +61,15 @@ interface GrupoDisplay {
   ],
 })
 export class RegistrarApuestaPage {
-  private readonly fb             = inject(FormBuilder);
+  private readonly fb              = inject(FormBuilder);
   private readonly apuestasService = inject(ApuestasService);
-  private readonly relojService   = inject(RelojService);
-  private readonly loadingCtrl    = inject(LoadingController);
-  private readonly toastCtrl      = inject(ToastController);
-  private readonly navCtrl        = inject(NavController);
+  private readonly relojService    = inject(RelojService);
+  private readonly loadingCtrl     = inject(LoadingController);
+  private readonly toastCtrl       = inject(ToastController);
+  private readonly navCtrl         = inject(NavController);
 
   /** Grupos calculados a partir del fixture — solo para display. */
-  readonly grupos: GrupoDisplay[];
+  readonly grupos: GrupoDisplay[] = buildGrupos(PARTIDOS);
 
   /** true mientras el POST está en vuelo — evita doble-submit. */
   isSubmitting = false;
@@ -101,8 +97,6 @@ export class RegistrarApuestaPage {
         )
       ),
     });
-
-    this.grupos = this.buildGrupos();
   }
 
   get bets(): FormArray {
@@ -121,7 +115,6 @@ export class RegistrarApuestaPage {
     await loading.present();
 
     try {
-      //Verificar que la ventana de apuestas esté abierta
       const reloj = await firstValueFrom(this.relojService.verificar());
 
       if (!reloj.success || !reloj.abierto) {
@@ -135,7 +128,6 @@ export class RegistrarApuestaPage {
         return;
       }
 
-      //Enviar la apuesta
       loading.message = 'Registrando apuesta...';
       const { nombre, identificacion, bets } = this.form.getRawValue();
       const response = await firstValueFrom(
@@ -150,7 +142,8 @@ export class RegistrarApuestaPage {
       } else {
         await this.showToast(response.error ?? 'Error al registrar la apuesta', 'danger');
       }
-    } catch {
+    } catch (err: unknown) {
+      console.error('[RegistrarApuesta] Error al enviar:', err);
       await loading.dismiss();
       await this.showToast('Error de conexión. Intenta de nuevo.', 'danger');
     } finally {
@@ -159,15 +152,6 @@ export class RegistrarApuestaPage {
   }
 
   // ── Helpers ──────────────────────────────────────────────────────────
-
-  private buildGrupos(): GrupoDisplay[] {
-    const map = new Map<string, Array<Partido & { index: number }>>();
-    PARTIDOS.forEach((partido, index) => {
-      if (!map.has(partido.grupo)) map.set(partido.grupo, []);
-      map.get(partido.grupo)!.push({ ...partido, index });
-    });
-    return Array.from(map.entries()).map(([nombre, partidos]) => ({ nombre, partidos }));
-  }
 
   private async showToast(message: string, color: 'success' | 'danger'): Promise<void> {
     const toast = await this.toastCtrl.create({

@@ -1,0 +1,171 @@
+// ── Fondo general ─────────────────────────────────────────────────────────
+.posiciones-content {
+  --background: var(--pf-background-app);
+}
+
+// ── Estados: loading / error / empty ──────────────────────────────────────
+.state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.loading-spinner {
+  color: var(--pf-color-primary);
+  width: 40px;
+  height: 40px;
+}
+
+.state-text {
+  font-size: 14px;
+  color: #6B7280;
+  margin: 0;
+}
+
+.error-text {
+  color: #DC2626;
+}
+
+.error-icon,
+.empty-icon {
+  font-size: 56px;
+  color: #D1D5DB;
+}
+
+// ── Sección del ranking ────────────────────────────────────────────────────
+.ranking-section {
+  padding: 16px 8px 32px;
+}
+
+// Cabecera de columnas
+.ranking-header {
+  display: flex;
+  align-items: center;
+  padding: 0 16px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.col-pos    { width: 36px; flex-shrink: 0; text-align: center; }
+.col-nombre { flex: 1; padding: 0 8px; }
+.col-cedula { width: 80px; flex-shrink: 0; text-align: center; }
+.col-puntos { width: 40px; flex-shrink: 0; text-align: right; }
+
+// ── Lista ──────────────────────────────────────────────────────────────────
+.ranking-list {
+  background: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+// ── Item base ──────────────────────────────────────────────────────────────
+.ranking-item {
+  --background: var(--pf-background-card);
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  --inner-padding-end: 0;
+
+  border: 1px solid var(--pf-border-light);
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+
+  // Highlight top 3
+  &.medalla-oro {
+    --background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+    border-color: #FCD34D;
+    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.25);
+  }
+
+  &.medalla-plata {
+    --background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+    border-color: #CBD5E1;
+    box-shadow: 0 2px 8px rgba(148, 163, 184, 0.25);
+  }
+
+  &.medalla-bronce {
+    --background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+    border-color: #FDBA74;
+    box-shadow: 0 2px 8px rgba(251, 146, 60, 0.2);
+  }
+}
+
+// ── Badge de posición ──────────────────────────────────────────────────────
+.posicion-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #E5E7EB;
+  flex-shrink: 0;
+
+  &.medalla-oro    { background: #F59E0B; }
+  &.medalla-plata  { background: #94A3B8; }
+  &.medalla-bronce { background: #F97316; }
+}
+
+.posicion-num {
+  font-size: 14px;
+  font-weight: 700;
+  color: #374151;
+
+  .medalla-oro    & { color: #ffffff; }
+  .medalla-plata  & { color: #ffffff; }
+  .medalla-bronce & { color: #ffffff; }
+}
+
+// ── Nombre y cédula ────────────────────────────────────────────────────────
+.entry-label {
+  padding: 0 8px;
+}
+
+.entry-nombre {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.entry-cedula {
+  font-size: 12px;
+  color: #6B7280;
+  margin: 0;
+}
+
+// ── Puntos ─────────────────────────────────────────────────────────────────
+.puntos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 40px;
+}
+
+.puntos-valor {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--pf-color-primary);
+  line-height: 1;
+}
+
+.puntos-label {
+  font-size: 10px;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}

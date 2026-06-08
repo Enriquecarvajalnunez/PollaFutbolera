@@ -7,6 +7,55 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!-- Pantalla por implementar -->
+<ion-content class="admin-content">
+
+  <!-- ── Botones de acción admin ────────────────────────────────────────── -->
+  <section class="actions-section">
+
+    <!-- Calcular Ranking -->
+    <ion-button expand="block" class="btn-ranking">
+      <div class="btn-inner">
+        <ion-icon name="calculator-outline" class="btn-icon"></ion-icon>
+        <div class="btn-text">
+          <span class="btn-title">Calcular Ranking</span>
+          <span class="btn-desc">Recalcula las posiciones de todos los apostadores</span>
+        </div>
+      </div>
+    </ion-button>
+
+    <!-- Registrar Administradores -->
+    <ion-button expand="block" class="btn-register-admin">
+      <div class="btn-inner">
+        <ion-icon name="person-add-outline" class="btn-icon"></ion-icon>
+        <div class="btn-text">
+          <span class="btn-title">Registrar Administradores</span>
+          <span class="btn-desc">Agrega nuevos usuarios con privilegios de admin</span>
+        </div>
+      </div>
+    </ion-button>
+
+    <!-- Buscar Empates -->
+    <ion-button expand="block" class="btn-find-ties">
+      <div class="btn-inner">
+        <ion-icon name="scale-outline" class="btn-icon"></ion-icon>
+        <div class="btn-text">
+          <span class="btn-title">Buscar Empates</span>
+          <span class="btn-desc">Detecta apostadores con el mismo puntaje</span>
+        </div>
+      </div>
+    </ion-button>
+
+    <!-- Resolver Empates -->
+    <ion-button expand="block" class="btn-resolve-ties">
+      <div class="btn-inner">
+        <ion-icon name="checkmark-circle-outline" class="btn-icon"></ion-icon>
+        <div class="btn-text">
+          <span class="btn-title">Resolver Empates</span>
+          <span class="btn-desc">Aplica los criterios de desempate al ranking</span>
+        </div>
+      </div>
+    </ion-button>
+
+  </section>
+
 </ion-content>

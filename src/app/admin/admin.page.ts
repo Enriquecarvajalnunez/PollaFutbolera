@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { addIcons } from 'ionicons';
 import {
@@ -17,28 +18,42 @@ import {
   IonIcon,
   IonCard,
   IonCardContent, IonGrid, IonRow, IonCol,
+  IonItem,
+  IonInput,
+  IonLabel,
+  IonList,
   LoadingController,
   ToastController,
 } from '@ionic/angular/standalone';
 import { RankingService } from '../core/services/ranking.service';
-import { BuscarEmpatesResponse, CalcularRankingResponse } from '../core/models/ranking.model';
+
+export interface Admin {
+  nombre: string;
+  cedula: string;
+  correo: string;
+}
 
 @Component({
   selector: 'app-admin',
   templateUrl: 'admin.page.html',
   styleUrls: ['admin.page.scss'],
-  imports: [IonCol, IonRow, IonGrid, IonHeader, IonToolbar, IonContent, IonButton, IonIcon,IonCard,IonCardContent],
+  imports: [FormsModule, IonCol, IonRow, IonGrid, IonHeader, IonToolbar, IonContent, IonButton, IonIcon, IonCard, IonCardContent, IonItem, IonInput, IonLabel, IonList],
 })
 export class AdminPage {
   private readonly rankingSvc  = inject(RankingService);
   private readonly loadingCtrl = inject(LoadingController);
   private readonly toastCtrl   = inject(ToastController);
 
-  stats = [
-    {key: 'administradores', label: 'Adminsitradores activos', value: 0},
-  ];
+  admins: Admin[] = [];
+  nuevoAdmin: Admin = { nombre: '', cedula: '', correo: '' };
+  showAdminForm = false;
 
-  isSubmitting = false;
+  get totalAdmins(): number {
+    return this.admins.length;
+  }
+
+  isSubmittingCalcular = false;
+  isSubmittingBuscar   = false;
 
   constructor() {
     // En componentes standalone los iconos NO se registran
@@ -54,9 +69,9 @@ export class AdminPage {
   }
 
   async calcularRanking(): Promise<void> {
-    if (this.isSubmitting) return;
+    if (this.isSubmittingCalcular) return;
 
-    this.isSubmitting = true;
+    this.isSubmittingCalcular = true;
     const loading = await this.loadingCtrl.create({ message: 'Calculando ranking...' });
     await loading.present();
 
@@ -78,14 +93,14 @@ export class AdminPage {
       await loading.dismiss();
       await this.showToast('Error de conexión. Intenta de nuevo.', 'danger');
     } finally {
-      this.isSubmitting = false;
+      this.isSubmittingCalcular = false;
     }
   }
 
   async buscarEmpates(): Promise<void> {
-    if (this.isSubmitting) return;
+    if (this.isSubmittingBuscar) return;
 
-    this.isSubmitting = true;
+    this.isSubmittingBuscar = true;
     const loading = await this.loadingCtrl.create({ message: 'Buscando empates...' });
     await loading.present();
 
@@ -111,8 +126,24 @@ export class AdminPage {
       await loading.dismiss();
       await this.showToast('Error de conexión. Intenta de nuevo.', 'danger');
     } finally {
-      this.isSubmitting = false;
+      this.isSubmittingBuscar = false;
     }
+  }
+
+  registrarAdmin(): void {
+    if (!this.nuevoAdmin.nombre.trim() || !this.nuevoAdmin.cedula.trim()) {
+      this.showToast('Completa todos los campos', 'danger');
+      return;
+    }
+
+    this.admins.push({ ...this.nuevoAdmin });
+    this.nuevoAdmin = { nombre: '', cedula: '', correo: '' };
+    this.showToast('Administrador registrado', 'success');
+  }
+
+  eliminarAdmin(cedula: string): void {
+    this.admins = this.admins.filter((a) => a.cedula !== cedula);
+    this.showToast('Administrador eliminado', 'success');
   }
 
   private async showToast(message: string, color: 'success' | 'danger'): Promise<void> {

@@ -121,3 +121,88 @@
 
   height: 72px;
 }
+
+// ── Card de administración inline ──────────────────────────────
+.admin-card {
+  background: var(--pf-background-card);
+  border: 1px solid var(--pf-border-light);
+  border-radius: 14px;
+  padding: 4px 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.admin-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--pf-color-primary);
+  margin: 0;
+  padding: 12px 16px 0;
+}
+
+.admin-form-actions {
+  padding: 8px 16px 12px;
+}
+
+.btn-admin-submit {
+  --border-radius: 12px;
+  height: 48px;
+  margin: 0;
+}
+
+.admin-divider {
+  height: 1px;
+  background: var(--pf-border-light);
+  margin: 0 16px;
+}
+
+.admin-list-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6B7280;
+  padding: 12px 16px 4px;
+  margin: 0;
+}
+
+.admin-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+
+.admin-cedula {
+  font-size: 12px;
+  color: #9CA3AF;
+  margin: 0;
+}
+
+.btn-register-admin-submit {
+  --border-radius: 12px;
+  height: 48px;
+  margin: 0;
+}
+
+.admin-divider {
+  height: 1px;
+  background: var(--pf-border-light);
+  margin: 0 16px;
+}
+
+.admin-list-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6B7280;
+  padding: 12px 16px 4px;
+  margin: 0;
+}
+
+.admin-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+
+.admin-cedula {
+  font-size: 12px;
+  color: #9CA3AF;
+  margin: 0;
+}

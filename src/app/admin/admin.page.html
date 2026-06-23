@@ -13,16 +13,14 @@
   <section class="stats-section">
     <ion-grid [fixed]="true">
       <ion-row>
-        @for (stat of stats; track stat.key) {
-          <ion-col size="4">
-            <ion-card class="stat-card">
-              <ion-card-content>
-                <p class="stat-value">{{ stat.value }}</p>
-                <p class="stat-label">{{ stat.label }}</p>
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        }
+        <ion-col size="4">
+          <ion-card class="stat-card">
+            <ion-card-content>
+              <p class="stat-value">{{ totalAdmins }}</p>
+              <p class="stat-label">Adminsitradores activos</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
       </ion-row>
     </ion-grid>
   </section>
@@ -31,7 +29,7 @@
   <section class="actions-section">
 
     <!-- Calcular Ranking -->
-    <ion-button expand="block" class="btn-ranking" (click)="calcularRanking()" [disabled]="isSubmitting">
+    <ion-button expand="block" class="btn-ranking" (click)="calcularRanking()" [disabled]="isSubmittingCalcular">
       <div class="btn-inner">
         <ion-icon name="calculator-outline" class="btn-icon"></ion-icon>
         <div class="btn-text">
@@ -42,7 +40,7 @@
     </ion-button>
 
     <!-- Registrar Administradores -->
-    <ion-button expand="block" class="btn-register-admin">
+    <ion-button expand="block" class="btn-register-admin" (click)="showAdminForm = !showAdminForm">
       <div class="btn-inner">
         <ion-icon name="person-add-outline" class="btn-icon"></ion-icon>
         <div class="btn-text">
@@ -52,8 +50,52 @@
       </div>
     </ion-button>
 
+    <!-- ── Formulario + Lista de administradores inline ────────── -->
+    @if (showAdminForm) {
+      <div class="admin-card">
+        <p class="admin-card-title">Nuevo administrador</p>
+        <ion-list>
+          <ion-item>
+            <ion-label position="stacked">Nombre</ion-label>
+            <ion-input [(ngModel)]="nuevoAdmin.nombre" placeholder="Nombre del administrador"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Cédula</ion-label>
+            <ion-input [(ngModel)]="nuevoAdmin.cedula" placeholder="Número de cédula"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Correo</ion-label>
+            <ion-input [(ngModel)]="nuevoAdmin.correo" placeholder="Correo"></ion-input>
+          </ion-item>
+        </ion-list>
+        <div class="admin-form-actions">
+          <ion-button expand="block" class="btn-admin-submit" (click)="registrarAdmin()">
+            Registrar
+          </ion-button>
+        </div>
+
+        @if (admins.length > 0) {
+          <div class="admin-divider"></div>
+          <p class="admin-list-title">Administradores registrados ({{ admins.length }})</p>
+          <ion-list>
+            @for (admin of admins; track admin.cedula) {
+              <ion-item>
+                <ion-label>
+                  <p class="admin-name">{{ admin.nombre }}</p>
+                  <p class="admin-cedula">{{ admin.cedula }}</p>
+                </ion-label>
+                <ion-button slot="end" fill="clear" color="danger" (click)="eliminarAdmin(admin.cedula)">
+                  <ion-icon name="close-circle-outline"></ion-icon>
+                </ion-button>
+              </ion-item>
+            }
+          </ion-list>
+        }
+      </div>
+    }
+
     <!-- Buscar Empates -->
-    <ion-button expand="block" class="btn-find-ties" (click)="buscarEmpates()" [disabled]="isSubmitting">
+    <ion-button expand="block" class="btn-find-ties" (click)="buscarEmpates()" [disabled]="isSubmittingBuscar">
       <div class="btn-inner">
         <ion-icon name="scale-outline" class="btn-icon"></ion-icon>
         <div class="btn-text">

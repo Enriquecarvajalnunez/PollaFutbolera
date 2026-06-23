@@ -1,0 +1,76 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="app-header-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/inicio"></ion-back-button>
+    </ion-buttons>
+    <div class="header-brand">
+      <h1 class="brand-title">Buscar Apuestas</h1>
+      <p class="brand-subtitle">Consulta tu historial de apuestas</p>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="buscar-content">
+
+  <section class="search-section">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ion-item class="search-input-item">
+        <ion-input
+          formControlName="identificacion"
+          type="number"
+          label="Cédula"
+          labelPlacement="floating"
+          placeholder="Ingresa tu número de cédula"
+          [clearInput]="true"
+        ></ion-input>
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        type="submit"
+        class="btn-search-submit"
+        [disabled]="form.invalid || isSubmitting"
+      >
+        <ion-icon name="search-outline" slot="start"></ion-icon>
+        Buscar
+      </ion-button>
+    </form>
+  </section>
+
+  @if (isSubmitting) {
+    <div class="state-container">
+      <ion-spinner></ion-spinner>
+      <p class="state-text">Buscando apuestas...</p>
+    </div>
+  }
+
+  @if (!isSubmitting && nombre && bets.length > 0) {
+    <section class="results-section">
+      <h2 class="results-title">Apuestas de {{ nombre }}</h2>
+
+      @for (grupo of grupos; track grupo.grupo) {
+        <ion-card class="grupo-card">
+          <ion-card-header>
+            <ion-card-title>{{ grupo.grupo }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            @for (partido of grupo.partidos; track $index) {
+              <div class="partido-row">
+                <span class="equipo equipo-a">{{ partido.equipoA }}</span>
+                <span class="marcador">{{ partido.marcadorA }} - {{ partido.marcadorB }}</span>
+                <span class="equipo equipo-b">{{ partido.equipoB }}</span>
+              </div>
+            }
+          </ion-card-content>
+        </ion-card>
+      }
+    </section>
+  }
+
+  @if (!isSubmitting && searched && bets.length === 0) {
+    <div class="state-container">
+      <p class="state-text">No se encontraron apuestas para esta cédula</p>
+    </div>
+  }
+
+</ion-content>

@@ -1,0 +1,112 @@
+.buscar-content {
+  --background: var(--pf-background-app);
+}
+
+.search-section {
+  padding: 20px 16px 8px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.search-input-item {
+  --background: var(--pf-background-card);
+  border: 1px solid var(--pf-border-light);
+  border-radius: 12px;
+}
+
+.btn-search-submit {
+  --background: linear-gradient(135deg, var(--pf-color-search) 0%, var(--pf-color-search-dark) 100%);
+  --border-radius: 14px;
+  --color: #ffffff;
+  --box-shadow: 0 4px 16px rgba(168, 85, 247, 0.35);
+  height: 52px;
+  margin: 0;
+}
+
+.state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  gap: 12px;
+}
+
+.state-text {
+  font-size: 14px;
+  color: #6B7280;
+  text-align: center;
+}
+
+.results-section {
+  padding: 8px 16px 32px;
+}
+
+.results-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 12px 0;
+  color: var(--pf-color-primary);
+}
+
+.grupo-card {
+  --background: var(--pf-background-card);
+  border: 1px solid var(--pf-border-light);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+
+  ion-card-header {
+    padding-bottom: 8px;
+  }
+
+  ion-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--pf-color-primary);
+  }
+
+  ion-card-content {
+    padding: 4px 16px 12px;
+  }
+}
+
+.partido-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--pf-border-light);
+  gap: 8px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.equipo {
+  font-size: 13px;
+  font-weight: 500;
+  flex: 1;
+}
+
+.equipo-a {
+  text-align: left;
+}
+
+.equipo-b {
+  text-align: right;
+}
+
+.marcador {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--pf-color-primary);
+  white-space: nowrap;
+  min-width: 48px;
+  text-align: center;
+}

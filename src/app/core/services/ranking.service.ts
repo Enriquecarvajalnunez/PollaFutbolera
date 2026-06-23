@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
-import { RankingResponse } from '../models/ranking.model';
+import { BuscarEmpatesResponse, CalcularRankingResponse, RankingResponse } from '../models/ranking.model';
 
 /**
  * Consulta la tabla de posiciones al Google Apps Script.
@@ -13,5 +13,13 @@ export class RankingService {
 
   obtener(): Observable<RankingResponse> {
     return this.api.get<RankingResponse>({ accion: 'verRanking' });
+  }
+
+  calcular(): Observable<CalcularRankingResponse> {
+    return this.api.get<CalcularRankingResponse>({ accion: 'calcularRanking' });
+  }
+
+  buscarEmpates(): Observable<BuscarEmpatesResponse> {
+    return this.api.get<BuscarEmpatesResponse>({ accion: 'buscarEmpates' });
   }
 }

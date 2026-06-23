@@ -11,6 +11,11 @@
   gap: 16px;
 }
 
+.stats-section {
+  padding: 20px 4px 4px;
+
+}
+
 // Layout interno del botón: icono + columna de textos
 // (mismo patrón que home.page.scss — reutilizable por diseño)
 .btn-inner {
@@ -63,6 +68,20 @@
 
 // ── Botón: Registrar Administradores (azul primario) ──────────────────────
 .btn-register-admin {
+  --background:           linear-gradient(135deg, var(--pf-color-primary) 0%, var(--pf-color-primary-dark) 100%);
+  --background-hover:     linear-gradient(135deg, #1D4ED8 0%, #1E3A8A 100%);
+  --background-activated: linear-gradient(135deg, #1E3A8A 0%, #1E3370 100%);
+  --border-radius: 14px;
+  --color: #ffffff;
+  --box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
+  --padding-top: 0;
+  --padding-bottom: 0;
+
+  height: 72px;
+}
+
+// ── Botón: Eliminar administrador (verde) ──────────────────────────────────────
+.btn-delete-admin {
   --background:           linear-gradient(135deg, var(--pf-color-primary) 0%, var(--pf-color-primary-dark) 100%);
   --background-hover:     linear-gradient(135deg, #1D4ED8 0%, #1E3A8A 100%);
   --background-activated: linear-gradient(135deg, #1E3A8A 0%, #1E3370 100%);

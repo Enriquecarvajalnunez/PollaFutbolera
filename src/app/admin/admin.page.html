@@ -9,11 +9,29 @@
 
 <ion-content class="admin-content">
 
+  <!-- ── Tarjetas de adminsitradores activos ───────────────────────────────────── -->
+  <section class="stats-section">
+    <ion-grid [fixed]="true">
+      <ion-row>
+        @for (stat of stats; track stat.key) {
+          <ion-col size="4">
+            <ion-card class="stat-card">
+              <ion-card-content>
+                <p class="stat-value">{{ stat.value }}</p>
+                <p class="stat-label">{{ stat.label }}</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        }
+      </ion-row>
+    </ion-grid>
+  </section>
+
   <!-- ── Botones de acción admin ────────────────────────────────────────── -->
   <section class="actions-section">
 
     <!-- Calcular Ranking -->
-    <ion-button expand="block" class="btn-ranking">
+    <ion-button expand="block" class="btn-ranking" (click)="calcularRanking()" [disabled]="isSubmitting">
       <div class="btn-inner">
         <ion-icon name="calculator-outline" class="btn-icon"></ion-icon>
         <div class="btn-text">
@@ -35,7 +53,7 @@
     </ion-button>
 
     <!-- Buscar Empates -->
-    <ion-button expand="block" class="btn-find-ties">
+    <ion-button expand="block" class="btn-find-ties" (click)="buscarEmpates()" [disabled]="isSubmitting">
       <div class="btn-inner">
         <ion-icon name="scale-outline" class="btn-icon"></ion-icon>
         <div class="btn-text">
@@ -52,6 +70,17 @@
         <div class="btn-text">
           <span class="btn-title">Resolver Empates</span>
           <span class="btn-desc">Aplica los criterios de desempate al ranking</span>
+        </div>
+      </div>
+    </ion-button>
+
+    <!-- Eliminar usuario -->
+    <ion-button expand="block" class="btn-delete-admin">
+      <div class="btn-inner">
+        <ion-icon name="close-Circle-Outline" class="btn-icon"></ion-icon>
+        <div class="btn-text">
+          <span class="btn-title">Eliminar Usuario</span>
+          <span class="btn-desc">Elimina un usuario administrador</span>
         </div>
       </div>
     </ion-button>

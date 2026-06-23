@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { addIcons } from 'ionicons';
-import { addCircleOutline, searchOutline } from 'ionicons/icons';
+import { addCircleOutline, searchOutline, footballOutline, closeOutline } from 'ionicons/icons';
 import {
   IonHeader,
   IonToolbar,
@@ -12,8 +13,15 @@ import {
   IonCardContent,
   IonButton,
   IonIcon,
+  IonModal,
+  IonButtons,
+  IonTitle,
   NavController,
 } from '@ionic/angular/standalone';
+import { PARTIDOS } from '../core/fixtures/partidos.fixture';
+import { GrupoDisplay, buildGrupos } from '../registrar-apuesta/registrar-apuesta.model';
+import { RankingService } from '../core/services/ranking.service';
+import { RankingEntry } from '../core/models/ranking.model';
 
 @Component({
   selector: 'app-home',
@@ -30,26 +38,48 @@ import {
     IonCardContent,
     IonButton,
     IonIcon,
+    IonModal,
+    IonButtons,
+    IonTitle,
   ],
 })
 export class HomePage {
-  private readonly navCtrl = inject(NavController);
-  /** Estadísticas que se mostrarán en las tarjetas superiores.
-   *  Los valores serán reemplazados por datos reales cuando
-   *  se integre el servicio de backend. */
-  stats = [
-    { key: 'groups',   label: 'Total Grupos\nde equipos', value: 0 },
-    { key: 'teams',    label: 'Total equipos\nde Grupo',  value: 0 },
-    { key: 'bettors',  label: 'Total\nApostadores',       value: 0 },
-  ];
+  private readonly navCtrl     = inject(NavController);
+  private readonly rankingSvc = inject(RankingService);
+
+  readonly grupos: GrupoDisplay[] = buildGrupos(PARTIDOS);
+
+  readonly totalGrupos = this.grupos.length;
+  readonly totalEquipos  = PARTIDOS.length * 2;
+  totalApostadores = 0;
+  apostadores: RankingEntry[] = [];
+
+  showGroupDetail = false;
+  showApostadoresDetail = false;
 
   constructor() {
-    // En componentes standalone los iconos NO se registran
-    // automáticamente — deben declararse explícitamente aquí.
-    addIcons({ addCircleOutline, searchOutline });
+    addIcons({ addCircleOutline, searchOutline, footballOutline, closeOutline });
+  }
+
+  ionViewWillEnter(): void {
+    this.cargarApostadores();
+  }
+
+  private async cargarApostadores(): Promise<void> {
+    try {
+      const res = await firstValueFrom(this.rankingSvc.obtener());
+      this.totalApostadores = res.ranking.length;
+      this.apostadores = res.ranking;
+    } catch {
+      this.totalApostadores = 0;
+    }
   }
 
   irARegistrar(): void {
     this.navCtrl.navigateForward('/registrar-apuesta');
+  }
+
+  irABuscar(): void {
+    this.navCtrl.navigateForward('/buscar-apuesta');
   }
 }
